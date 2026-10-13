@@ -1,0 +1,31 @@
+seed:
+  random_state: 1235
+
+search:
+  test_size: 0.2
+  cv_folds: 3
+  n_iter: 8
+  scoring: accuracy
+  n_jobs: -1
+  c_value_min: 0.001
+  c_value_max: 1000.0
+  class_weights:
+    - null
+    - balanced
+  sublinear_tf_values:
+    - false
+    - true
+
+tracking:
+  enabled: true
+  tracking_uri: sqlite:///mlflow.db
+  experiment_name: sentiment-bayes-search
+
+artifacts:
+  train_split: splits/train_split.parquet
+  test_split: splits/test_split.parquet
+  search_summary: metrics/bayes_search_summary.json
+  cv_results: metrics/bayes_search_cv_results.json
+  holdout_metrics: metrics/holdout_metrics.json
+  model: models/bayes_search_best_estimator.joblib
+

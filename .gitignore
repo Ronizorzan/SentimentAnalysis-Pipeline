@@ -1,0 +1,34 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Experiment and model outputs managed by MLflow/DVC
+mlartifacts/
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+splits/
+models/
+/metrics/bayes_search_summary.json
+/metrics/bayes_search_cv_results.json
+/metrics/holdout_metrics.json
+
+
+# Data
+data
+processed_data
+
+
+# Checkpoints
+checkpoints
+.ipynb_checkpoints
+
+# Environment files
+.env

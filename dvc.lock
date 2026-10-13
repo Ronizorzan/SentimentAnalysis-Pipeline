@@ -1,0 +1,67 @@
+schema: '2.0'
+stages:
+  bayesian_search:
+    cmd: python -m pipeline.model_validation_cv
+    deps:
+    - path: core/utils.py
+      hash: md5
+      md5: c96848498380746fa5eca9b12d5c1578
+      size: 2063
+    - path: pipeline/model_validation_cv.py
+      hash: md5
+      md5: 06b576d49624ff3412214b6f69178151
+      size: 7795
+    - path: processed_data/clean_tweets_full.parquet
+      hash: md5
+      md5: 93dd48918311c5e9aae6fb38e0d31973
+      size: 66716038
+    params:
+      params.yaml:
+        artifacts.cv_results: metrics/bayes_search_cv_results.json
+        artifacts.holdout_metrics: metrics/holdout_metrics.json
+        artifacts.model: models/bayes_search_best_estimator.joblib
+        artifacts.search_summary: metrics/bayes_search_summary.json
+        artifacts.test_split: splits/test_split.parquet
+        artifacts.train_split: splits/train_split.parquet
+        search.c_value_max: 1000.0
+        search.c_value_min: 0.001
+        search.class_weights:
+        - 
+        - balanced
+        search.cv_folds: 3
+        search.n_iter: 8
+        search.n_jobs: -1
+        search.scoring: accuracy
+        search.sublinear_tf_values:
+        - false
+        - true
+        search.test_size: 0.2
+        seed.random_state: 1235
+        tracking.enabled: true
+        tracking.experiment_name: sentiment-bayes-search
+        tracking.tracking_uri: sqlite:///mlflow.db
+    outs:
+    - path: metrics/bayes_search_cv_results.json
+      hash: md5
+      md5: 4e5e46f048bcc92cc20cb4360d70c350
+      size: 6168
+    - path: metrics/bayes_search_summary.json
+      hash: md5
+      md5: f9aeec54af0d03d68147da408e76be31
+      size: 638
+    - path: metrics/holdout_metrics.json
+      hash: md5
+      md5: 96825840708c9b385379bace43b54787
+      size: 895
+    - path: models/bayes_search_best_estimator.joblib
+      hash: md5
+      md5: 87517ce39c6fad22c10df430f5e4c0a0
+      size: 104255060
+    - path: splits/test_split.parquet
+      hash: md5
+      md5: 4133941acd35943247d6f1a70c1d1556
+      size: 13619709
+    - path: splits/train_split.parquet
+      hash: md5
+      md5: 5afa3d9dc982c524cb0853745c6e6ed9
+      size: 54403368

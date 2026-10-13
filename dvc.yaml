@@ -1,0 +1,36 @@
+stages:
+  bayesian_search:
+    cmd: python -m pipeline.model_validation_cv
+    deps:
+      - core/utils.py
+      - pipeline/model_validation_cv.py
+      - processed_data/clean_tweets_full.parquet
+    params:
+      - params.yaml:
+          - seed.random_state
+          - search.test_size
+          - search.cv_folds
+          - search.n_iter
+          - search.scoring
+          - search.n_jobs
+          - search.c_value_min
+          - search.c_value_max
+          - search.class_weights
+          - search.sublinear_tf_values
+          - tracking.enabled
+          - tracking.tracking_uri
+          - tracking.experiment_name
+          - artifacts.train_split
+          - artifacts.test_split
+          - artifacts.search_summary
+          - artifacts.cv_results
+          - artifacts.holdout_metrics
+          - artifacts.model
+    outs:
+      - splits/train_split.parquet
+      - splits/test_split.parquet
+      - models/bayes_search_best_estimator.joblib
+    metrics:
+      - metrics/bayes_search_summary.json
+      - metrics/bayes_search_cv_results.json
+      - metrics/holdout_metrics.json
